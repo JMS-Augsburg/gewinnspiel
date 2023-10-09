@@ -14,7 +14,8 @@ und natürlich am [**Infoabend** am 25.10.2023](https://jms-augsburg.de/studiere
 
 Dieses Repository kann einfach mit einer der folgenden Optionen bearbeitet werden.
 
-Der Einstiegspunkt für die Anwendung ist dabei [`app.js`](app.js).
+Der Einstiegspunkt für die Anwendung ist dabei [`app.js`](app.js)
+und alle Konfigurationen finden sich in [`.env`](.env).
 
 ## Direkt im Browser mit [StackBlitz](https://stackblitz.com/)
 

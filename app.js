@@ -2,7 +2,10 @@ const path = require('path');
 const express = require('express');
 const handlebars = require('express-handlebars');
 const { checkSchema, matchedData, validationResult } = require('express-validator');
+const dotenv = require('dotenv');
 const db = require('./database');
+
+dotenv.config();
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
@@ -76,7 +79,7 @@ app.get('/winner', (req, res) => {
 const passwordValidator = checkSchema({
 	password: {
 		equals: {
-			options: 'password',
+			options: process.env.APP_PASSWORD,
 		},
 	},
 });
