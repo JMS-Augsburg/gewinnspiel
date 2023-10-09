@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
 const handlebars = require('express-handlebars');
+const { checkSchema, matchedData, validationResult } = require('express-validator');
 const db = require('./database');
 
 const app = express();
@@ -21,11 +22,31 @@ app.get('/', (req, res) => {
 	res.render('index', {page_title: 'JMS Gewinnspiel'});
 });
 
-app.post('/submit', (req, res) => {
-	const name = req.body.name;
-	const email = req.body.email;
+const validator = checkSchema(
+	{
+		name: {
+			isString: true,
+			trim: true,
+			notEmpty: {
+				errorMessage: 'Name ist ein Pflichtfeld!',
+			},
+		},
+		email: {
+			isString: true,
+			trim: true,
+			isEmail: {
+				errorMessage: 'Ungültige E-Mail-Adresse',
+			},
+		},
+	},
+	['body'],
+);
 
-	if (!name || !email) {
+app.post('/submit', validator, (req, res) => {
+	const validationErrors = validationResult(req);
+	const {name, email} = matchedData(req);
+
+	if (!validationErrors.isEmpty()) {
 		console.log('Hier fehlt etwas', {name, email});
 		res.render('error', {page_title: 'Fehler', name, email});
 		return;
