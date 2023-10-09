@@ -69,6 +69,37 @@ app.post('/submit', validator, (req, res) => {
 	);
 });
 
+app.get('/winner', (req, res) => {
+	res.render('winner_password');
+});
+
+const passwordValidator = checkSchema({
+	password: {
+		equals: {
+			options: 'password',
+		},
+	},
+});
+
+app.post('/winner', passwordValidator, (req, res) => {
+	const validationErrors = validationResult(req);
+
+	if (!validationErrors.isEmpty()) {
+		res.redirect('/winner');
+		return;
+	}
+
+	db.get('SELECT * FROM users ORDER BY RANDOM() LIMIT 1', (err, result) => {
+		if (err || !result) {
+			console.error({err, result});
+			res.render('winner_error');
+			return;
+		}
+
+		res.render('winner', {name: result.name});
+	});
+});
+
 app.listen(3000, function () {
 	console.log('Webserver läuft auf dem Port 3000.');
 });
