@@ -2,6 +2,7 @@ const path = require('path');
 const express = require('express');
 const handlebars = require('express-handlebars');
 const { checkSchema, matchedData, validationResult } = require('express-validator');
+const crypto = require('node:crypto');
 const dotenv = require('dotenv');
 const db = require('./database');
 
@@ -22,7 +23,7 @@ app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'html'));
 
 app.get('/', (req, res) => {
-	res.render('index', {page_title: 'JMS Gewinnspiel'});
+	res.render('index', {page_title: 'JMS Gewinnspiel', randomVal: crypto.randomUUID()});
 });
 
 const validator = checkSchema(
@@ -41,23 +42,34 @@ const validator = checkSchema(
 				errorMessage: 'Ungültige E-Mail-Adresse',
 			},
 		},
+		randomVal: {
+			isString: true,
+			matches: {
+				// we use UUIDs as our random values in the format
+				// 0a98d180-28dc-46d7-a71f-e6c13412bde9
+				// i.e. groups of 8, 4, 4, 4 and 12 characters
+				// separated by '-'
+				options: /.{8}-.{4}-.{4}-.{4}-.{12}/,
+				errorMessage: 'Ungültiger Zufallswert',
+			},
+		},
 	},
 	['body'],
 );
 
 app.post('/submit', validator, (req, res) => {
 	const validationErrors = validationResult(req);
-	const {name, email} = matchedData(req);
+	const {name, email, randomVal} = matchedData(req);
 
 	if (!validationErrors.isEmpty()) {
-		console.log('Hier fehlt etwas', {name, email});
+		console.log('Hier fehlt etwas', {name, email, randomVal});
 		res.render('error', {page_title: 'Fehler', name, email});
 		return;
 	}
 
 	db.run(
-		'INSERT INTO users (name, email) VALUES (?, ?)',
-		[name, email],
+		'INSERT INTO users (name, email, randomVal) VALUES (?, ?, ?)',
+		[name, email, randomVal],
 		function (err) {
 			if (err) {
 				console.error(err.message);
@@ -65,7 +77,7 @@ app.post('/submit', validator, (req, res) => {
 				return;
 			}
 
-			console.log('Daten in die Tabelle users eingefügt.', {name, email});
+			console.log('Daten in die Tabelle users eingefügt.', {name, email, randomVal});
 
 			res.render('success', {page_title: 'JMS Gewinnspiel', name, email});
 		},
@@ -92,7 +104,7 @@ app.post('/winner', passwordValidator, (req, res) => {
 		return;
 	}
 
-	db.get('SELECT * FROM users ORDER BY RANDOM() LIMIT 1', (err, result) => {
+	db.get('SELECT * FROM users ORDER BY randomVal LIMIT 1', (err, result) => {
 		if (err || !result) {
 			console.error({err, result});
 			res.render('winner_error');

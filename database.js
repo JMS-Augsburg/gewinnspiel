@@ -17,6 +17,7 @@ db.run(
 		id INTEGER PRIMARY KEY,
 		name TEXT,
 		email TEXT,
+		randomVal TEXT,
 		timestamp DATE_TIME DEFAULT CURRENT_TIMESTAMP
 	)`,
 	function (err) {
