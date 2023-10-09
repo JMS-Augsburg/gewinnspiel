@@ -1,20 +1,19 @@
-<html>
+<!DOCTYPE html>
+<html lang="de">
 	<head>
-		<title>Fehler</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>{{ page_title }}</title>
+
 		<link rel="stylesheet" href="/css/styles.css">
 		<link rel="stylesheet" href="/bootstrap/icons/bootstrap-icons.min.css">
+
 		<script src="/bootstrap/js/bootstrap.min.js" defer></script>
 	</head>
 	<body class="text-bg-dark">
 		<div class="container p-3">
-			<h1>Es gab einen Fehler</h1>
-			<!---
-			<p>Name: ${name}</p>
-			<p>E-Mail: ${email}</p>
-			--->
-			<p>
-				Wie es aussieht, funktioniert hier etwas nicht.
-			</p>
+			{{{ body }}}
 		</div>
 	</body>
 </html>

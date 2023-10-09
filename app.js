@@ -1,4 +1,6 @@
+const path = require('path');
 const express = require('express');
+const handlebars = require('express-handlebars');
 const db = require('./database');
 
 const app = express();
@@ -8,8 +10,15 @@ app.use('/css', express.static(__dirname + '/dist'));
 app.use('/bootstrap/js', express.static(__dirname + '/node_modules/bootstrap/dist/js'));
 app.use('/bootstrap/icons', express.static(__dirname + '/node_modules/bootstrap-icons/font'));
 
+app.engine('hbs', handlebars.engine({
+	defaultLayout: 'layout.hbs',
+	layoutsDir: path.join(__dirname, 'html'),
+}));
+app.set('view engine', 'hbs');
+app.set('views', path.join(__dirname, 'html'));
+
 app.get('/', (req, res) => {
-	res.sendFile(__dirname + '/index.html');
+	res.render('index', {page_title: 'JMS Gewinnspiel'});
 });
 
 app.post('/submit', (req, res) => {
@@ -18,7 +27,7 @@ app.post('/submit', (req, res) => {
 
 	if (!name || !email) {
 		console.log('Hier fehlt etwas', {name, email});
-		res.sendFile(__dirname + '/error.html');
+		res.render('error', {page_title: 'Fehler', name, email});
 		return;
 	}
 
@@ -28,29 +37,13 @@ app.post('/submit', (req, res) => {
 		function (err) {
 			if (err) {
 				console.error(err.message);
-				res.sendFile(__dirname + '/error.html');
+				res.render('error', {page_title: 'Fehler', name, email});
 				return;
 			}
 
 			console.log('Daten in die Tabelle users eingefügt.', {name, email});
 
-			res.send(`
-				<html>
-					<head>
-						<title>JMS Gewinnspiel</title>
-						<link rel="stylesheet" href="/css/styles.css">
-						<link rel="stylesheet" href="/bootstrap/icons/bootstrap-icons.min.css">
-						<script src="/bootstrap/js/bootstrap.min.js" defer></script>
-					</head>
-					<body class="text-bg-dark">
-						<div class="container p-3">
-							<h1>Danke für deine Einsendung</h1>
-							<p>Name: ${name}</p>
-							<p>E-Mail: ${email}</p>
-						</div>
-					</body>
-				</html>
-			`);
+			res.render('success', {page_title: 'JMS Gewinnspiel', name, email});
 		},
 	);
 });
