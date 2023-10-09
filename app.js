@@ -4,6 +4,10 @@ const db = require('./database');
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 
+app.use('/bootstrap/js', express.static(__dirname + '/node_modules/bootstrap/dist/js'));
+app.use('/bootstrap/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
+app.use('/bootstrap/icons', express.static(__dirname + '/node_modules/bootstrap-icons/font'));
+
 app.get('/', (req, res) => {
 	res.sendFile(__dirname + '/index.html');
 });
@@ -34,11 +38,16 @@ app.post('/submit', (req, res) => {
 				<html>
 					<head>
 						<title>JMS Gewinnspiel</title>
+						<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+						<link rel="stylesheet" href="/bootstrap/icons/bootstrap-icons.min.css">
+						<script src="/bootstrap/js/bootstrap.min.js" defer></script>
 					</head>
-					<body>
-						<h1>Danke für deine Einsendung</h1>
-						<p>Name: ${name}</p>
-						<p>E-Mail: ${email}</p>
+					<body class="text-bg-dark">
+						<div class="container p-3">
+							<h1>Danke für deine Einsendung</h1>
+							<p>Name: ${name}</p>
+							<p>E-Mail: ${email}</p>
+						</div>
 					</body>
 				</html>
 			`);
