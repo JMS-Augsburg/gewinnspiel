@@ -25,6 +25,15 @@ Sollte folgender Link bei dir also nicht funktionieren, versuche eine der andere
 
 [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/~/github.com/JMS-Augsburg/gewinnspiel)
 
+## Mit [`vscode`](https://code.visualstudio.com/)
+
+Voraussetzung: lokal installiertes [`node.js` und `npm`](https://nodejs.org/).
+
+- Repository in VSCode öffnen
+- aus Debug-Panel "Start Server"-Config starten (Keyboard-Shortcut: `F5`)
+
+Danach ist die Anwendung unter http://localhost:3000/ erreichbar.
+
 ## Mit lokalem `node.js`
 
 Voraussetzung: lokal installiertes [`node.js` und `npm`](https://nodejs.org/).

@@ -1,0 +1,11 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "npm: install",
+			"detail": "install dependencies from package",
+			"type": "npm",
+			"script": "install"
+		}
+	]
+}
