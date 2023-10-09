@@ -48,6 +48,13 @@ const validator = checkSchema(
 				errorMessage: 'Ungültige E-Mail-Adresse',
 			},
 		},
+		tos_consent: {
+			isBoolean: true,
+			equals: {
+				options: 'true',
+				errorMessage: 'Den Teilnahmebedingungen muss zugestimmt werden',
+			},
+		},
 		randomVal: {
 			isString: true,
 			matches: {
