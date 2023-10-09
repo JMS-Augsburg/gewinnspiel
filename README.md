@@ -25,12 +25,37 @@ Sollte folgender Link bei dir also nicht funktionieren, versuche eine der andere
 
 [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/~/github.com/JMS-Augsburg/gewinnspiel)
 
+## In [GitHub Codespaces](https://docs.github.com/en/codespaces/overview)
+
+Code einfach im Browser mit GitHub Codespaces öffnen:
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/JMS-Augsburg/gewinnspiel)
+
+Zum Starten des Server dann aus Debug-Panel "Start Server"-Config starten (Keyboard-Shortcut: `F5`).
+
+Es sollte automatisch eine Notification erscheinen mit Möglichkeit "Im Browser öffnen".
+
 ## Mit [`vscode`](https://code.visualstudio.com/)
 
-Voraussetzung: lokal installiertes [`node.js` und `npm`](https://nodejs.org/).
+Voraussetzung, entweder:
+- lokal installiertes [`node.js` und `npm`](https://nodejs.org/)
+- installierte [`Dev Containers` Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
 
+Ausführen:
 - Repository in VSCode öffnen
+- optional (empfohlen): Ordner als [devcontainer](https://code.visualstudio.com/docs/devcontainers/containers) öffnen - sollte automatisch vorgeschlagen werden
 - aus Debug-Panel "Start Server"-Config starten (Keyboard-Shortcut: `F5`)
+
+Danach ist die Anwendung unter http://localhost:3000/ erreichbar.
+
+## Mit `docker compose`
+
+Voraussetzung: lokal installiertes [`docker compose`](https://docs.docker.com/compose/install/).
+
+Folgende Befehle im aktuellen Ordner ausführen:
+~~~sh
+docker compose up
+~~~
 
 Danach ist die Anwendung unter http://localhost:3000/ erreichbar.
 

@@ -1,0 +1,10 @@
+services:
+  node:
+    image: mcr.microsoft.com/devcontainers/javascript-node:1-20-bullseye
+    command: sh -c 'npm install && npm run dev'
+    user: node
+    working_dir: /code
+    volumes:
+      - ./:/code/
+    ports:
+      - 3000:3000
