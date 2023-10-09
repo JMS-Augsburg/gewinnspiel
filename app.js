@@ -4,6 +4,7 @@ const handlebars = require('express-handlebars');
 const { checkSchema, matchedData, validationResult } = require('express-validator');
 const crypto = require('node:crypto');
 const dotenv = require('dotenv');
+const metadata = require('./package.json');
 const db = require('./database');
 
 dotenv.config();
@@ -24,6 +25,11 @@ app.set('views', path.join(__dirname, 'html'));
 
 app.get('/', (req, res) => {
 	res.render('index', {page_title: 'JMS Gewinnspiel', randomVal: crypto.randomUUID()});
+});
+
+app.get('/code', (req, res) => {
+	console.log('redirecting to source code');
+	res.redirect(metadata.homepage);
 });
 
 const validator = checkSchema(
