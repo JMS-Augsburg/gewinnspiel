@@ -13,6 +13,7 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/css', express.static(__dirname + '/dist'));
+app.use('/images', express.static(__dirname + '/images'));
 app.use('/bootstrap/js', express.static(__dirname + '/node_modules/bootstrap/dist/js'));
 app.use('/bootstrap/icons', express.static(__dirname + '/node_modules/bootstrap-icons/font'));
 

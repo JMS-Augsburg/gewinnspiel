@@ -1,67 +1,99 @@
-<h1>JMS Gewinnspiel</h1>
+<div class="row">
+	<div class="col-12 col-md-6 pb-4">
+		<h1 class="text-primary fw-bold mb-4">
+			JMS Gewinnspiel
+		</h1>
 
-<h2>Was gibt es zu gewinnen?</h2>
-<p>
-	Insgesamt verlosen wir drei Gewinne:<br>
-	Zu gewinnen gibt es ein Arduino K000007 Starter Kit und einen YubiKey 5C NFC
-</p>
-
-<h2>Wer kann mitmachen?</h2>
-<p>
-	Dieses Gewinnspiel richtet sich an IT-Studenten und alle IT-affine.
-	Mitmachen darf aber jeder!
-</p>
-
-<h2>Wie kann ich teilnehmen?</h2>
-<p>
-	Um am Gewinnspiel teilzunehmen, musst du dich einfach nur mit Namen und E-Mail
-	hier unten eintragen.
-</p>
-<p>
-	Aus allen, die es geschafft haben, sich erfolgreich einzutragen, werden bei
-	unserem Infoabend dann zwei Gewinner zufällig gezogen. Die ersten Gewinner können sich eines der Preise aussuchen.
-	Der Gewinn kann jedoch nur vorort eingelöst werden, verpasse also nicht
-	<a href="https://jms-augsburg.de/studierende/#:~:text=Infoabend.">unseren Infoabend</a>!
-	Um Betrug zu vermeiden, musst du dich mit deiner studentischen E-Mail eintragen.
-</p>
-<p>
-	Den Code zu dieser Seite findest du außerdem
-	<a href="/code" target="_blank">hier</a>.
-	Möglicherweise wirst du ihn brauchen.
-	<i class="bi-emoji-wink-fill text-secondary"></i>
-</p>
-
-<form action="/submit" method="post">
-	<input type="hidden" name="randomVal" value="{{ randomVal }}">
-
-	<div class="mb-3">
-		<label for="name">Name</label>
-		<input type="text" id="name" name="name" required class="form-control"/>
-	</div>
-
-	<div class="mb-3">
-		<label for="email">E-Mail</label>
-		<input type="email" id="email" name="email" required class="form-control"/>
-	</div>
-
-	<div class="form-check mb-3">
-		<input class="form-check-input" type="checkbox" id="tos_consent" name="tos_consent" value="true" required>
-		<label class="form-check-label" for="tos_consent">
-			Ich habe die o.g. Teilnahmebedingungen gelesen und stimme ihnen zu
-		</label>
-	</div>
-
-	<button type="submit" class="btn btn-primary">
-		<i class="bi-send-fill"></i>
-		Absenden
-	</button>
-	<div class="privacy-policy">
-		<h3>Datenschutzerklärung</h3>
+		<h2 class="text-primary">Was gibt es zu gewinnen?</h2>
 		<p>
-			Deine angegebenen Daten werden nur für die Durchführung des Gewinnspiels verwendet.
-			Am Infoabend werden die Namen der Gewinner ausgerufen. Wir behalten uns vor, dass wir deine Bestätigungsmail
-			sehen wollen, um zu überprüfen, ob auch wirklich du am Gewinnspiel teilgenommen hast. Spätestens am Tag nach dem
-			Infoabend werden wir alle eingegangen Daten löschen.
+			Insgesamt verlosen wir zwei Gewinne:<br>
+			<ul>
+				<li>
+					1x Arduino K000007 Starter Kit
+				</li>
+				<li>
+					1x YubiKey 5C NFC
+				</li>
+			</ul>
+		</p>
+
+		<h2 class="text-primary">Wer kann mitmachen?</h2>
+		<p>
+			Dieses Gewinnspiel richtet sich an IT-Studenten und alle IT-affine.
+			Mitmachen darf aber jeder!
+		</p>
+
+		<h2 class="text-primary">Wie kann ich teilnehmen?</h2>
+		<p>
+			Um am Gewinnspiel teilzunehmen, musst du dich einfach nur mit Namen und E-Mail
+			hier unten eintragen.
 		</p>
 	</div>
-</form>
+	<div class="col-12 col-md-6 p-0 position-relative hero">
+		<img src="/images/hero1.jpg" alt="" class="position-absolute w-100 h-100 object-fit-cover">
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-12 col-md-6 p-0 position-relative hero order-1 order-md-0">
+		<img src="/images/hero2.jpg" alt="" class="position-absolute w-100 h-100 object-fit-cover">
+	</div>
+	<div class="col-12 col-md-6 py-5">
+		<p>
+			Aus allen, die es geschafft haben, sich erfolgreich einzutragen, werden bei
+			unserem Infoabend dann zwei Gewinner zufällig gezogen. Die ersten Gewinner können sich eines der Preise aussuchen.
+			Der Gewinn kann jedoch nur vorort eingelöst werden, verpasse also nicht
+			<a href="https://jms-augsburg.de/studierende/#:~:text=Infoabend.">unseren Infoabend</a>!
+			Um Betrug zu vermeiden, musst du dich mit deiner studentischen E-Mail eintragen.
+		</p>
+		<p>
+			Den Code zu dieser Seite findest du außerdem
+			<a href="/code" target="_blank">hier</a>.
+			Möglicherweise wirst du ihn brauchen.
+			<i class="bi-emoji-wink-fill text-secondary"></i>
+		</p>
+	</div>
+</div>
+
+<div class="row justify-content-center">
+	<div class="col col-md-8">
+		<div class="card my-3">
+			<div class="card-body">
+				<form action="/submit" method="post">
+					<input type="hidden" name="randomVal" value="{{ randomVal }}">
+
+					<div class="mb-3">
+						<label for="name">Name</label>
+						<input type="text" id="name" name="name" required class="form-control"/>
+					</div>
+
+					<div class="mb-3">
+						<label for="email">E-Mail</label>
+						<input type="email" id="email" name="email" required class="form-control"/>
+					</div>
+
+					<div class="form-check mb-3">
+						<input class="form-check-input" type="checkbox" id="tos_consent" name="tos_consent" value="true" required>
+						<label class="form-check-label" for="tos_consent">
+							Ich habe die o.g. Teilnahmebedingungen gelesen und stimme ihnen zu
+						</label>
+					</div>
+
+					<button type="submit" class="btn btn-primary">
+						<i class="bi-send-fill"></i>
+						Absenden
+					</button>
+					<div class="privacy-policy">
+						<h3>Datenschutzerklärung</h3>
+						<p>
+							Deine angegebenen Daten werden nur für die Durchführung des Gewinnspiels verwendet.
+							Am Infoabend werden die Namen der Gewinner ausgerufen. Wir behalten uns vor, dass wir deine Bestätigungsmail
+							sehen wollen, um zu überprüfen, ob auch wirklich du am Gewinnspiel teilgenommen hast. Spätestens am Tag nach dem
+							Infoabend werden wir alle eingegangen Daten löschen.
+						</p>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

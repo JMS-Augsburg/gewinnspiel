@@ -3,6 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="icon" href="/images/favicon.png" sizes="32x32">
 
 		<title>{{ page_title }}</title>
 
@@ -11,9 +12,94 @@
 
 		<script src="/bootstrap/js/bootstrap.min.js" defer></script>
 	</head>
-	<body class="text-bg-dark">
-		<div class="container p-3">
-			{{{ body }}}
+	<body class="bg-info">
+		<header class="position-sticky top-0 z-1">
+			<nav class="navbar navbar-expand bg-white border-bottom">
+				<div class="container-md p-md-0">
+					<a class="navbar-brand" href="/">
+						<img src="/images/logo.png" alt="" class="logo">
+					</a>
+
+					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+						<ul class="navbar-nav ms-auto">
+							<li class="nav-item">
+								<a href="https://jms-augsburg.de/studierende/#:~:text=Infoabend." class="nav-link text-primary fw-bold" target="_blank">
+									Infoabend
+								</a>
+							</li>
+							<li class="nav-item">
+								<a href="https://jms-augsburg.de/" class="nav-link text-primary fw-bold" target="_blank">
+									Über JMS
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</header>
+
+		<div class="bg-white pt-1 pb-3">
+			<div class="container-md">
+				{{{ body }}}
+			</div>
 		</div>
+
+		<footer>
+			<div class="text-bg-primary overflow-hidden">
+				<div class="container py-4">
+					<div class="row justify-content-between text-center">
+						<div class="col-12 col-lg-3">
+							<div class="mb-3">
+								<img src="/images/logo2.png" alt="" class="logo">
+							</div>
+							<div class="mb-3 small">
+								Die studentische Unternehmensberatung der Universität Augsburg
+							</div>
+							<div class="small">
+								JMS Augsburg e. V. | Universitätsstraße 2 | 86159 Augsburg
+							</div>
+						</div>
+
+						<div class="col-12 col-lg-4 my-4">
+							Folge uns auch auf Social Media:
+							<div class="mt-3">
+									<a href="https://github.com/JMS-Augsburg" class="fs-6 mx-1 my-3 p-3 rounded-pill text-white bg-dark" target="_blank"><i class="bi-github"></i></a>
+									<a href="https://instagram.com/jms_augsburg/" class="fs-6 mx-1 my-3 p-3 rounded-pill text-white bg-dark" target="_blank"><i class="bi-instagram"></i></a>
+									<a href="https://facebook.com/jms.augsburg.ev/" class="fs-6 mx-1 my-3 p-3 rounded-pill text-white bg-dark" target="_blank"><i class="bi-facebook"></i></a>
+									<a href="https://www.linkedin.com/company/jms-augsburg-e-v/" class="fs-6 mx-1 my-3 p-3 rounded-pill text-white bg-dark" target="_blank"><i class="bi-linkedin"></i></a>
+							</div>
+						</div>
+
+						<div class="col-3 d-none d-lg-block alt-logo">
+							<img src="/images/Zirbelnuss.png" alt="" class="mw-100">
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="text-bg-info py-4">
+				<div class="container-md">
+					<div class="row align-items-center justify-content-center justify-content-md-between">
+						<div class="col-auto">
+							Copyright © 2023 - JMS Augsburg e. V.
+						</div>
+						<div class="col-auto">
+							<ul class="nav">
+								<li class="nav-item">
+									<a href="https://jms-augsburg.de/impressum/" class="nav-link text-reset text-uppercase" target="_blank">
+										Impressum
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="https://jms-augsburg.de/datenschutz/" class="nav-link text-reset text-uppercase" target="_blank">
+										Datenschutz
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
 	</body>
 </html>

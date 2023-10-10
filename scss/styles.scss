@@ -1,5 +1,21 @@
 // JMS Corporate Design
 $primary: #00355a;
 $secondary: #ff9801;
+$info: #00253E;
+$dark: #737a7f;
+
+$small-font-size: .65em;
 
 @import 'bootstrap';
+
+.logo {
+	max-width: 12rem;
+}
+
+.alt-logo {
+	max-height: 10rem;
+}
+
+.hero {
+	min-height: 16rem;
+}
