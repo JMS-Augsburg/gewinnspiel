@@ -1,0 +1,17 @@
+services:
+  node:
+    image: mcr.microsoft.com/devcontainers/javascript-node:1-20-bullseye
+    command: sh -c 'npm install && npm run dev'
+    user: node
+    working_dir: /code
+    volumes:
+      - ./:/code/
+    labels:
+      traefik.enable: true
+      traefik.http.routers.example-app.rule: Host(`gewinnspiel.jms-augsburg.de`)
+      traefik.http.services.example-app.loadbalancer.server.port: 3000
+
+networks:
+  default:
+    external:
+      name: traefik_network
