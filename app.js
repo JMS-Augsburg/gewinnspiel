@@ -1,5 +1,6 @@
 const path = require('path');
 const express = require('express');
+const cors = require('cors');
 const handlebars = require('express-handlebars');
 const { checkSchema, matchedData, validationResult } = require('express-validator');
 const crypto = require('node:crypto');
@@ -10,6 +11,14 @@ const db = require('./database');
 dotenv.config();
 
 const app = express();
+app.use(cors());
+app.use((req, res, next) => {
+	res.header({
+		'Cross-Origin-Resource-Policy': 'cross-origin',
+		'Cross-Origin-Embedder-Policy': 'require-corp',
+	});
+	next();
+});
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/css', express.static(__dirname + '/dist'));
@@ -23,6 +32,7 @@ app.engine('hbs', handlebars.engine({
 }));
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'html'));
+app.locals.submit_url = process.env.APP_SUBMIT_URL;
 
 app.get('/', (req, res) => {
 	res.render('index', {page_title: 'JMS IT-Gewinnspiel', randomVal: crypto.randomUUID()});
