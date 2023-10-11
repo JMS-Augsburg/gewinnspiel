@@ -1,3 +1,40 @@
-<div class="p-5 text-center">
-	<strong>{{ name }}</strong>
-</div>
+{{#if name }}
+	<div class="container my-5 py-5">
+		<div class="row">
+			<div class="col-12 col-md-8 col-lg-6 m-auto">
+				<div class="row flex-column">
+					<div class="col">
+						Platz {{ place }}.
+					</div>
+					<div class="col my-5 py-5 text-center">
+						<h1>
+							{{ name }}
+						</h1>
+					</div>
+					<div class="col">
+						<form action="/winner" method="post">
+							<input type="hidden" name="password" value="{{ password }}">
+
+							<div class="row justify-content-between">
+								<div class="col-auto">
+									<button type="submit" class="btn btn-primary btn-sm" name="place" value="{{ previousPlace }}" {{#unless previousPlace }}disabled{{/unless}}>
+										<i class="bi-caret-left-fill"></i>
+									</button>
+								</div>
+								<div class="col-auto">
+									<button type="submit" class="btn btn-primary btn-sm" name="place" value="{{ nextPlace }}">
+										<i class="bi-caret-right-fill"></i>
+									</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{{else}}
+	<div class="alert alert-danger p-3 my-5">
+		Es konnte kein Teilnehmer für Platz {{ place }} gefunden werden.
+	</div>
+{{/if}}

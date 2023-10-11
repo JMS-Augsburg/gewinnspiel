@@ -110,23 +110,42 @@ const passwordValidator = checkSchema({
 	},
 });
 
-app.post('/winner', passwordValidator, (req, res) => {
+const placeValidator = checkSchema({
+	place: {
+		isInt: true,
+	},
+});
+
+app.post('/winner', passwordValidator, placeValidator, (req, res) => {
 	const validationErrors = validationResult(req);
+	const data = matchedData(req);
+	const password = data.password;
+	const place = parseInt(data.place);
 
 	if (!validationErrors.isEmpty()) {
 		res.redirect('/winner');
 		return;
 	}
 
-	db.get('SELECT * FROM users ORDER BY randomVal LIMIT 1', (err, result) => {
-		if (err || !result) {
-			console.error({err, result});
-			res.render('winner_error');
-			return;
-		}
+	db.get(
+		'SELECT * FROM users ORDER BY randomVal LIMIT ?, 1',
+		[place],
+		(err, result) => {
+			if (err || !result) {
+				console.error({err, result});
+				res.render('winner', {place});
+				return;
+			}
 
-		res.render('winner', {name: result.name});
-	});
+			res.render('winner', {
+				name: result.name,
+				place,
+				password,
+				previousPlace: place - 1,
+				nextPlace: place + 1,
+			});
+		},
+	);
 });
 
 app.listen(3000, function () {
