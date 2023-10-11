@@ -71,13 +71,23 @@ const validator = checkSchema(
 	['body'],
 );
 
+app.get('/submit', (req, res) => {
+	res.redirect('/');
+});
+
 app.post('/submit', validator, (req, res) => {
 	const validationErrors = validationResult(req);
 	const {name, email, randomVal} = matchedData(req);
 
 	if (!validationErrors.isEmpty()) {
 		console.log('Hier fehlt etwas', {name, email, randomVal});
-		res.render('error', {page_title: 'Fehler', name, email});
+		res.render('index', {
+			page_title: 'JMS IT-Gewinnspiel',
+			name,
+			email,
+			randomVal: crypto.randomUUID(),
+			errors: JSON.stringify(validationErrors.mapped()),
+		});
 		return;
 	}
 
@@ -87,13 +97,19 @@ app.post('/submit', validator, (req, res) => {
 		function (err) {
 			if (err) {
 				console.error(err.message);
-				res.render('error', {page_title: 'Fehler', name, email});
+				res.render('index', {
+					page_title: 'JMS IT-Gewinnspiel',
+					name,
+					email,
+					randomVal: crypto.randomUUID(),
+					errors: JSON.stringify(err.message),
+				});
 				return;
 			}
 
 			console.log('Daten in die Tabelle users eingefügt.', {name, email, randomVal});
 
-			res.render('success', {page_title: 'JMS IT-Gewinnspiel', name, email});
+			res.render('index', {page_title: 'JMS IT-Gewinnspiel', name, email, success: true});
 		},
 	);
 });
