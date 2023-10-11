@@ -25,7 +25,7 @@ app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'html'));
 
 app.get('/', (req, res) => {
-	res.render('index', {page_title: 'JMS Gewinnspiel', randomVal: crypto.randomUUID()});
+	res.render('index', {page_title: 'JMS IT-Gewinnspiel', randomVal: crypto.randomUUID()});
 });
 
 app.get('/code', (req, res) => {
@@ -93,7 +93,7 @@ app.post('/submit', validator, (req, res) => {
 
 			console.log('Daten in die Tabelle users eingefügt.', {name, email, randomVal});
 
-			res.render('success', {page_title: 'JMS Gewinnspiel', name, email});
+			res.render('success', {page_title: 'JMS IT-Gewinnspiel', name, email});
 		},
 	);
 });

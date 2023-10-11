@@ -8,6 +8,10 @@ $small-font-size: .65em;
 
 @import 'bootstrap';
 
+.text-justify {
+	text-align: justify;
+}
+
 .logo {
 	max-width: 12rem;
 }
