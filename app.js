@@ -34,8 +34,20 @@ app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'html'));
 app.locals.submit_url = process.env.APP_SUBMIT_URL;
 
+function generateRandomInt() {
+	const min = 10;
+	const max = 100;
+
+	return Math.floor(Math.random() * (max - min) + min);
+}
+
 app.get('/', (req, res) => {
-	res.render('index', {page_title: 'JMS IT-Gewinnspiel', randomVal: crypto.randomUUID()});
+	res.render('index', {
+		page_title: 'JMS IT-Gewinnspiel',
+		randomVal: crypto.randomUUID(),
+		summand1: generateRandomInt(),
+		summand2: generateRandomInt(),
+	});
 });
 
 app.get('/code', (req, res) => {
@@ -77,9 +89,42 @@ const validator = checkSchema(
 				errorMessage: 'Ungültiger Zufallswert',
 			},
 		},
+		summand1: {
+			notEmpty: true,
+			isNumeric: true,
+		},
+		summand2: {
+			notEmpty: true,
+			isNumeric: true,
+		},
+		captcha: {
+			notEmpty: true,
+			isNumeric: true,
+		},
 	},
 	['body'],
 );
+
+function verifyCaptcha(data) {
+	const summand1 = data.summand1;
+	const summand2 = data.summand2;
+	const submitted = data.captcha;
+
+	const sum = summand1 * summand2;
+
+	if (submitted != sum) {
+		console.error('invalid captcha', {
+			summand1,
+			summand2,
+			submitted,
+			expected: sum,
+		});
+
+		return false;
+	}
+
+	return true;
+}
 
 app.get('/submit', (req, res) => {
 	res.redirect('/');
@@ -87,7 +132,8 @@ app.get('/submit', (req, res) => {
 
 app.post('/submit', validator, (req, res) => {
 	const validationErrors = validationResult(req);
-	const {name, email, randomVal} = matchedData(req);
+	const data = matchedData(req);
+	const {name, email, randomVal} = data;
 
 	if (!validationErrors.isEmpty()) {
 		console.log('Hier fehlt etwas', {name, email, randomVal});
@@ -96,7 +142,22 @@ app.post('/submit', validator, (req, res) => {
 			name,
 			email,
 			randomVal: crypto.randomUUID(),
+			summand1: generateRandomInt(),
+			summand2: generateRandomInt(),
 			errors: JSON.stringify(validationErrors.mapped()),
+		});
+		return;
+	}
+
+	if (!verifyCaptcha(data)) {
+		res.render('index', {
+			page_title: 'JMS IT-Gewinnspiel',
+			name,
+			email,
+			randomVal: crypto.randomUUID(),
+			summand1: generateRandomInt(),
+			summand2: generateRandomInt(),
+			errors: JSON.stringify('eingegebenes Captcha stimmt nicht mit dem erwarteten Wert überein!'),
 		});
 		return;
 	}
@@ -112,6 +173,8 @@ app.post('/submit', validator, (req, res) => {
 					name,
 					email,
 					randomVal: crypto.randomUUID(),
+					summand1: generateRandomInt(),
+					summand2: generateRandomInt(),
 					errors: JSON.stringify(err.message),
 				});
 				return;

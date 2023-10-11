@@ -132,6 +132,20 @@
 							</small>
 						</div>
 
+						<div class="mb-3">
+							<input type="hidden" name="summand1" value="{{ summand1 }}">
+							<input type="hidden" name="summand2" value="{{ summand2 }}">
+
+							<label for="captcha">Captcha</label>
+							<div class="input-group">
+								<span class="input-group-text">{{ summand1 }} + {{ summand2 }} =</span>
+								<input type="number" id="captcha" name="captcha" required class="form-control"/>
+							</div>
+							<small class="text-muted">
+								Beweise, dass du kein Bot bist, indem du dieses Captcha löst.
+							</small>
+						</div>
+
 						<div class="form-check mb-3">
 							<input class="form-check-input" type="checkbox" id="tos_consent" name="tos_consent" value="true" required>
 							<label class="form-check-label" for="tos_consent">
