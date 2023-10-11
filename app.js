@@ -148,6 +148,32 @@ app.post('/winner', passwordValidator, placeValidator, (req, res) => {
 	);
 });
 
+app.get('/all', (req, res) => {
+	res.render('users_password');
+});
+
+app.post('/all', passwordValidator, (req, res) => {
+	const validationErrors = validationResult(req);
+
+	if (!validationErrors.isEmpty()) {
+		res.redirect('/all');
+		return;
+	}
+
+	db.all(
+		'SELECT * FROM users ORDER BY id',
+		(err, users) => {
+			if (err || !users) {
+				console.error({err, result});
+				res.render('users', {users: []});
+				return;
+			}
+
+			res.render('users', {users});
+		},
+	);
+});
+
 app.listen(3000, function () {
 	console.log('Webserver läuft auf dem Port 3000.');
 });
